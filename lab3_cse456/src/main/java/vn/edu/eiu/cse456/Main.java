@@ -6,6 +6,9 @@ import vn.edu.eiu.cse456.entity.Major;
 import vn.edu.eiu.cse456.entity.School;
 import vn.edu.eiu.cse456.entity.Student;
 import vn.edu.eiu.cse456.infra.JpaUtil;
+import vn.edu.eiu.cse456.service.MajorService;
+import vn.edu.eiu.cse456.service.SchoolService;
+import vn.edu.eiu.cse456.service.StudentService;
 
 import java.time.LocalDate;
 
@@ -19,18 +22,12 @@ public class Main {
         school.addMajor(cse);
         school.addMajor(csq);
         Student st1 = new Student("Diep Tu", Gender.FEMALE, LocalDate.parse("2003-06-18"),3.2, 2021);
-        Student st2 = new Student("Nhi Tu", Gender.FEMALE, LocalDate.parse("2003-06-18"),3.2, 2021);
+        Student st2 = new Student("Nhi Truong", Gender.FEMALE, LocalDate.parse("2003-06-18"),3.2, 2021);
         cse.addStudent(st1);
         csq.addStudent(st2);
 
-        EntityManager em = JpaUtil.getEntityManager();
-        em.getTransaction().begin();
-        em.persist(school);
-        em.persist(cse);
-        em.persist(csq);
-        em.getTransaction().commit();
-        em.close();
-
+        SchoolService schoolService = new SchoolService();
+        schoolService.createSchool(school);
 
     }
 }
